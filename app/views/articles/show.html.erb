@@ -5,4 +5,32 @@
 </p>
 
 <%= link_to 'Редактировать', edit_article_path %> | 
+<%= link_to 'Удалить статью', article_path(@article), method: :delete, data: {confirm: "Вы действительно хотите удалить статю?"} %> |
 <%= link_to 'Вернуться к списку статей', articles_path %>
+
+<h4>Комментарии:</h4>
+<%= 'Комментариев еще нет' if @article.comments.empty? %>
+<% @article.comments.each do |comment| %>
+  <p>
+    <i>
+      <%= comment.author %> написал(а) в <%= comment.created_at.strftime("%H:%M") %>:
+    </i>
+  </p>
+  <p><%= comment.text %></p>
+  <hr>
+<% end %>
+<p> 
+  <%= form_for([@article, @article.comments.build]) do |f| %>
+    <p>
+      <%= f.label :author %><br />
+      <%= f.text_field :author%>
+    </p>
+    <p>
+      <%= f.label :text %><br />
+      <%= f.text_area :text %>
+    </p>
+    <p>
+      <%= f.submit 'оставить комментарий' %> 
+    </p>
+  <% end %>
+</p>

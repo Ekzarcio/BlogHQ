@@ -1,4 +1,4 @@
 class Article < ApplicationRecord
-  validates :title, presence: true
-  validates :text, presence: true
+  validates_presence_of :title, :text
+  has_many :comments
 end
