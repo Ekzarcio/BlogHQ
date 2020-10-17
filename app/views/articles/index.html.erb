@@ -1,0 +1,9 @@
+<h2>Список статей:</h2>
+<hr />
+
+<% @article.reverse.each do |article| %>
+  <h4><%= article.title %></h4>
+  <p><%= article.text %></p>
+  <p><%= link_to 'Подробнее', article_path(article) %></p>
+  <hr />
+<% end %>
